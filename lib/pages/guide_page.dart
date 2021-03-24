@@ -23,6 +23,11 @@ class _GuidePageState extends State<GuidePage> {
     setState(() => _isLoading = false);
   }
 
+  openPage(_number) async {
+    // Load specific page
+    PDFPage pageOne = await document.get(page: _number);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

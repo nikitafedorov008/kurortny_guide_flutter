@@ -51,12 +51,25 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Карта'),),
+      appBar: AppBar(
+        title: Text('Карта'),
+        actions: [
+          IconButton(
+              //onPressed: onPressed,
+              icon: Icon(Icons.settings),
+          ),
+        ],
+      ),
       body: GoogleMap(
           initialCameraPosition:
-          CameraPosition(target: LatLng(38.90, -77.03), zoom: 15),
+          CameraPosition(target: LatLng(60.0702,30.1120), zoom: 9),
           onMapCreated: _onMapCreated,
           myLocationEnabled: true,
+          compassEnabled: false,
+          myLocationButtonEnabled: true,
+          zoomControlsEnabled: true,
+          mapToolbarEnabled: true,
+          indoorViewEnabled: true,
           mapType: MapType.normal,
           markers: markersList.toSet()),
     );
@@ -74,7 +87,7 @@ class _MapPageState extends State<MapPage> {
     LatLngBounds _bounds = FindBoundsCoordinates().getBounds(markersList);
 
     // adjust camera to boundingBox
-    controller.animateCamera(CameraUpdate.newLatLngBounds(_bounds, 100.0));
+    controller.animateCamera(CameraUpdate.newLatLngBounds(_bounds, 20.0));
   }
 }
 

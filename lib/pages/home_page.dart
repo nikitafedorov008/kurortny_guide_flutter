@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                         Image.asset('assets/book.png', color: Colors.white,),
                         Text(
                             'Путеводитель',
-                          style: TextStyle(fontSize: 32, fontFamily: 'ProductSans',),
+                          style: TextStyle(fontSize: 30, fontFamily: 'ProductSans',),
                         ),
                         Text('по курортному', style: TextStyle(fontSize: 18, fontFamily: 'ProductSans'),),
                         Text('району', style: TextStyle(fontSize: 18, fontFamily: 'ProductSans'),)
