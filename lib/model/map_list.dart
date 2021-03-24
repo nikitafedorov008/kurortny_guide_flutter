@@ -1,5 +1,5 @@
-List<Map<String, dynamic>> locations = [
-  /*{
+/*List<Map<String, dynamic>> locations = [
+  {
     "Location_Number": "-76.97892538.882767",
     "Location_Name": "John Dean and Hannibal Hamlin Burial Sites",
     "Location_Type": "Park",
@@ -16,9 +16,16 @@ List<Map<String, dynamic>> locations = [
     "Location_Name": "John Little Farm Site",
     "Location_Type": "Hotel",
     "coordinates": [-77.045009, 38.919531]
-  },*/
-  //spb
+  },
   {
+    "Location_Number": "-77.04500938.919531",
+    "Location_Name": "John Little Shit",
+    "Location_Type": "Motel",
+    "coordinates": [-77.30, 38.40]
+  },
+ */
+  //spb
+  /*{
     "Location_Number": "29.86569360.028998",
     "Location_Name": "Дамба",
     "Location_Type": "5",
@@ -31,3 +38,5 @@ List<Map<String, dynamic>> locations = [
     "coordinates": [29.980015, 60.042399]
   },
 ];
+
+*/

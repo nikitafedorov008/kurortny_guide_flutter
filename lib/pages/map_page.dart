@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kurortny_guide_flutter/model/map_list.dart';
-import 'package:kurortny_guide_flutter/model/maps_markers.dart';
+import 'package:kurortny_guide_flutter/model/map_marker.dart';
 
 class MapPage extends StatefulWidget {
   @override
@@ -12,9 +12,30 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   GoogleMapController mapController;
-  Set<MapsMarkers> markersList = new Set();
+  Set<MapMarker> markersList = new Set();
 
-  /*List<Map<String, dynamic>> locations = [
+  List<Map<String, dynamic>> locations = [
+    {
+      "Location_Number": "29.86569360.02899",
+      "Location_Name": "Дамба",
+
+      "coordinates": [29.865693, 60.028998]
+    },
+    {
+      "Location_Number": "29.86569360.028998",
+      "Location_Name": "Аэродром",
+      "coordinates": [30.015883, 60.030205]
+    },
+    {
+      "Location_Number": "29.86569360.028998",
+      "Location_Name": "Кладбище",
+      "coordinates": [29.986544, 60.034729]
+    },
+    {
+      "Location_Number": "29.86569360.028998",
+      "Location_Name": "Горская",
+      "coordinates": [29.980015, 60.042399]
+    },
     {
       "Location_Number": "-76.97892538.882767",
       "Location_Name": "John Dean and Hannibal Hamlin Burial Sites",
@@ -30,13 +51,11 @@ class _MapPageState extends State<MapPage> {
       "Location_Name": "John Little Farm Site",
       "coordinates": [-77.045009, 38.919531]
     },
-  ];*/
+  ];
 
-//
-// add the markers to the markersList
   void _addMarkers() {
     locations.forEach((Map<String, dynamic> location) {
-      final MapsMarkers marker = MapsMarkers(
+      final MapMarker marker = MapMarker(
           location['Location_Name'],
           location['Location_Type'],
           id: MarkerId(location['Location_Number']),
@@ -76,37 +95,31 @@ class _MapPageState extends State<MapPage> {
   }
 
   void _onMapCreated(GoogleMapController controller) {
-    // update map controller
     setState(() {
       mapController = controller;
     });
-    // add the markers to the map
     _addMarkers();
 
-    // create bounding box for view
     LatLngBounds _bounds = FindBoundsCoordinates().getBounds(markersList);
 
-    // adjust camera to boundingBox
-    controller.animateCamera(CameraUpdate.newLatLngBounds(_bounds, 20.0));
+    controller.animateCamera(CameraUpdate.newLatLngBounds(_bounds, 100.0));
   }
 }
 
-///
-/// used to calculate the boundry for rendering the markers
-///
+
 class FindBoundsCoordinates {
-  LatLngBounds getBounds(Set<MapsMarkers> locations) {
+  LatLngBounds getBounds(Set<MapMarker> locations) {
     List<double> latitudes = [];
-    List<double> londitude = [];
+    List<double> longitude = [];
 
     locations.toList().forEach((index) {
       latitudes.add(index.position.latitude);
-      londitude.add(index.position.longitude);
+      longitude.add(index.position.longitude);
     });
 
     return LatLngBounds(
-      southwest: LatLng(latitudes.reduce(min), londitude.reduce(min)),
-      northeast: LatLng(latitudes.reduce(max), londitude.reduce(max)),
+      southwest: LatLng(latitudes.reduce(min), longitude.reduce(min)),
+      northeast: LatLng(latitudes.reduce(max), longitude.reduce(max)),
     );
   }
 }

@@ -5,12 +5,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 //
 // extending the google map marker to add more information
 // to it
-class MapsMarkers extends Marker {
+class MapMarker extends Marker {
   final String name;
   final String type;
   BitmapDescriptor bitColor;
 
-  MapsMarkers(this.name, this.type, {MarkerId id, lat, lng, onTap})
+  MapMarker(this.name, this.type, {MarkerId id, lat, lng, onTap})
       : super(
     markerId: id,
     consumeTapEvents: false,

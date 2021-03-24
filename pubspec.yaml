@@ -32,7 +32,7 @@ dependencies:
   advance_pdf_viewer: ^1.2.2
   #maps
   google_maps_flutter: ^2.0.1
-  google_maps_utils: ^1.4.0+1
+  fluster:
   #video
   youtube_player_flutter: ^7.0.0+7
   #ui
