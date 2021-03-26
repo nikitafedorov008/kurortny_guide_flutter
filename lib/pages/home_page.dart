@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
       /*appBar: AppBar(
         title: Text(widget.title),
       ),*/
-      backgroundColor: Colors.cyan,
+      //backgroundColor: Colors.cyan,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                           width: 2),   // set border width
                       borderRadius: BorderRadius.all(
                           Radius.circular(28)), // set rounded corner radius
-                      boxShadow: [BoxShadow(blurRadius: 32,color: Colors.cyan,offset: Offset(1,3))]// make rounded corner of border
+                      boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]// make rounded corner of border
                   ),
                   child: IconButton(
                     icon: Icon(Icons.play_arrow, color: Colors.white,),
@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                           width: 2),   // set border width
                       borderRadius: BorderRadius.all(
                           Radius.circular(28)), // set rounded corner radius
-                      boxShadow: [BoxShadow(blurRadius: 32,color: Colors.cyan,offset: Offset(1,3))]// make rounded corner of border
+                      boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]// make rounded corner of border
                   ),
                   child: IconButton(
                     icon: Icon(Icons.contact_support, color: Colors.white,),
@@ -99,13 +99,13 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Colors.redAccent,
                     border: Border.all(
                         color: Colors.white,// set border color
                         width: 6),   // set border width
                     borderRadius: BorderRadius.all(
                         Radius.circular(24)), // set rounded corner radius
-                    boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]// make rounded corner of border
+                    boxShadow: [BoxShadow(blurRadius: 32,color: Colors.redAccent,offset: Offset(1,3))]// make rounded corner of border
                 ),
                 child: MaterialButton(
                   onPressed: ()=> Navigator.push(context,
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   textColor: Colors.white,
-                  color: Colors.red,
+                  color: Colors.redAccent,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
                   child: Container(
                     width: 220,
@@ -140,13 +140,13 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.grey,
+                    color: Colors.cyan,
                     border: Border.all(
                         color: Colors.white,// set border color
                         width: 6),   // set border width
                     borderRadius: BorderRadius.all(
                         Radius.circular(24)), // set rounded corner radius
-                    boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]// make rounded corner of border
+                    boxShadow: [BoxShadow(blurRadius: 32,color: Colors.cyan,offset: Offset(1,3))]// make rounded corner of border
                 ),
                 child: MaterialButton(
                   onPressed: ()=> Navigator.push(context,
@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   textColor: Colors.white,
-                  color: Colors.grey,
+                  color: Colors.cyan,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
                   child: Container(
                     width: 220,

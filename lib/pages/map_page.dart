@@ -3,7 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kurortny_guide_flutter/model/map_list.dart';
-import 'package:kurortny_guide_flutter/model/map_marker.dart';
+
+Completer<GoogleMapController> _controller = Completer();
 
 class MapPage extends StatefulWidget {
   @override
@@ -11,115 +12,72 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  GoogleMapController mapController;
-  Set<MapMarker> markersList = new Set();
-
-  List<Map<String, dynamic>> locations = [
-    {
-      "Location_Number": "29.86569360.02899",
-      "Location_Name": "Дамба",
-
-      "coordinates": [29.865693, 60.028998]
-    },
-    {
-      "Location_Number": "29.86569360.028998",
-      "Location_Name": "Аэродром",
-      "coordinates": [30.015883, 60.030205]
-    },
-    {
-      "Location_Number": "29.86569360.028998",
-      "Location_Name": "Кладбище",
-      "coordinates": [29.986544, 60.034729]
-    },
-    {
-      "Location_Number": "29.86569360.028998",
-      "Location_Name": "Горская",
-      "coordinates": [29.980015, 60.042399]
-    },
-    {
-      "Location_Number": "-76.97892538.882767",
-      "Location_Name": "John Dean and Hannibal Hamlin Burial Sites",
-      "coordinates": [-76.978923660098019, 38.882767398397789]
-    },
-    {
-      "Location_Number": "-77.16515878125193238.938782583950172",
-      "Location_Name": "Camp Greene",
-      "coordinates": [-77.165158781251932, 38.938782583950172]
-    },
-    {
-      "Location_Number": "-77.04500938.919531",
-      "Location_Name": "John Little Farm Site",
-      "coordinates": [-77.045009, 38.919531]
-    },
-  ];
-
-  void _addMarkers() {
-    locations.forEach((Map<String, dynamic> location) {
-      final MapMarker marker = MapMarker(
-          location['Location_Name'],
-          location['Location_Type'],
-          id: MarkerId(location['Location_Number']),
-          lat: location['coordinates'][1],
-          lng: location['coordinates'][0],
-          onTap: null
-      );
-      markersList.add(marker);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Карта'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text("Карта"),
         actions: [
           IconButton(
               //onPressed: onPressed,
-              icon: Icon(Icons.settings),
+              icon: Icon(Icons.settings, color: Colors.cyan,),
           ),
         ],
       ),
-      body: GoogleMap(
-          initialCameraPosition:
-          CameraPosition(target: LatLng(60.0702,30.1120), zoom: 9),
-          onMapCreated: _onMapCreated,
-          myLocationEnabled: true,
-          compassEnabled: false,
-          myLocationButtonEnabled: true,
-          zoomControlsEnabled: true,
-          mapToolbarEnabled: true,
-          indoorViewEnabled: true,
-          mapType: MapType.normal,
-          markers: markersList.toSet()),
+      body: Stack(
+        children: <Widget>[_googleMaps(context)],
+      ),
+      /*floatingActionButton: FloatingActionButton.extended(
+        onPressed: _goToNextLocation,
+        label: Text('To the Next Location'),
+        icon: Icon(Icons.directions_boat),
+      ),*/
     );
-  }
-
-  void _onMapCreated(GoogleMapController controller) {
-    setState(() {
-      mapController = controller;
-    });
-    _addMarkers();
-
-    LatLngBounds _bounds = FindBoundsCoordinates().getBounds(markersList);
-
-    controller.animateCamera(CameraUpdate.newLatLngBounds(_bounds, 100.0));
   }
 }
 
+Widget _googleMaps(BuildContext context) {
+  return Container(
+    height: MediaQuery.of(context).size.height,
+    width: MediaQuery.of(context).size.width,
+    child: GoogleMap(
+      myLocationButtonEnabled: true,
+      myLocationEnabled: true,
+      mapType: MapType.normal,
+      initialCameraPosition:
+      CameraPosition(target: LatLng(60.1000, 29.5400), zoom: 10),
+      onMapCreated: (GoogleMapController controller) {
+        _controller.complete(controller);
+      },
+      //markers: {m1, m2, m3},
+      markers: Set<Marker>.of(
+          museumList
+              + religionList
+              + militaryList
+      ),
+    ),
+  );
+}
 
-class FindBoundsCoordinates {
-  LatLngBounds getBounds(Set<MapMarker> locations) {
-    List<double> latitudes = [];
-    List<double> longitude = [];
+/*Marker m1 = Marker(
+  markerId: MarkerId("1"),
+  position: LatLng(15.841461, 74.512202),
+  infoWindow: InfoWindow(title: "Дамба"),
+  icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose),
+);*/
 
-    locations.toList().forEach((index) {
-      latitudes.add(index.position.latitude);
-      longitude.add(index.position.longitude);
-    });
-
-    return LatLngBounds(
-      southwest: LatLng(latitudes.reduce(min), longitude.reduce(min)),
-      northeast: LatLng(latitudes.reduce(max), longitude.reduce(max)),
-    );
-  }
+Future<void> _goToNextLocation() async {
+  final GoogleMapController controller = await _controller.future;
+  controller.animateCamera(
+    CameraUpdate.newCameraPosition(
+      CameraPosition(
+          target: LatLng(37.43296265331129, -122.08832357078792),
+          zoom: 19.151926040649414,
+          tilt: 59.440717697143555,
+          bearing: 192.8334901395799),
+    ),
+  );
 }

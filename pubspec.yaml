@@ -31,8 +31,9 @@ dependencies:
   #pdf
   advance_pdf_viewer: ^1.2.2
   #maps
-  google_maps_flutter: ^2.0.1
-  fluster:
+  google_maps_flutter: ^1.1.1
+  #platform_maps_flutter: ^0.1.9+4
+  custom_info_window: ^0.0.4
   #video
   youtube_player_flutter: ^7.0.0+7
   #ui
@@ -40,6 +41,8 @@ dependencies:
   intro_slider: ^2.3.4
   page_view_indicators: ^2.0.0
   imagebutton: ^0.0.6
+  #utils
+  url_launcher: ^6.0.3
 
 dev_dependencies:
   flutter_test:

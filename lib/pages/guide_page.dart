@@ -19,25 +19,34 @@ class _GuidePageState extends State<GuidePage> {
 
   loadDocument() async {
     document = await PDFDocument.fromAsset('assets/guide_rus_small.pdf');
-
     setState(() => _isLoading = false);
   }
 
-  openPage(_number) async {
+  void openPage(_number) async {
     // Load specific page
-    PDFPage pageOne = await document.get(page: _number);
+    PDFPage page = await document.get(page: _number);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Путеводитель', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),), backgroundColor: Colors.cyan,),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text('Путеводитель',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+        ),
+      ),
       body: Center(
           child: _isLoading ? CircularProgressIndicator() : PDFViewer(
             document: document,
+            showPicker: true,
+            enableSwipeNavigation: true,
+            showIndicator: true,
+            showNavigation: true,
             zoomSteps: 1,
-            indicatorBackground: Colors.cyan,
-            pickerButtonColor: Colors.cyan,
+            indicatorBackground: Colors.redAccent,
+            pickerButtonColor: Colors.redAccent,
           ),
       ),
     );
