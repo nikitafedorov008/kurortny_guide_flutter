@@ -1,8 +1,6 @@
 PODS:
   - advance_pdf_viewer (1.0.5):
     - Flutter
-  - apple_maps_flutter (0.0.1):
-    - Flutter
   - Flutter (1.0.0)
   - flutter_inappwebview (0.0.1):
     - Flutter
@@ -27,7 +25,6 @@ PODS:
 
 DEPENDENCIES:
   - advance_pdf_viewer (from `.symlinks/plugins/advance_pdf_viewer/ios`)
-  - apple_maps_flutter (from `.symlinks/plugins/apple_maps_flutter/ios`)
   - Flutter (from `Flutter`)
   - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
   - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
@@ -43,8 +40,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   advance_pdf_viewer:
     :path: ".symlinks/plugins/advance_pdf_viewer/ios"
-  apple_maps_flutter:
-    :path: ".symlinks/plugins/apple_maps_flutter/ios"
   Flutter:
     :path: Flutter
   flutter_inappwebview:
@@ -60,7 +55,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   advance_pdf_viewer: 5c832f382b4ca84fe735f893b7e91aa830c27d7b
-  apple_maps_flutter: c59725efea39e13e703cde52a1d2b14866ad68a8
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_inappwebview: 69dfbac46157b336ffbec19ca6dfd4638c7bf189
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a

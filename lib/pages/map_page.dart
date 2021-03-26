@@ -355,7 +355,7 @@ Widget _googleMaps(BuildContext context) {
                 ),
                 child: Container(
                   height: 200,
-                  child: MapSheet(name: 'lol', page: 5, coordinates: LatLng(60.184712, 29.818013),),
+                  child: MapSheet(name: 'Братская могила воинов Советской Армии/погибших в боях Советско-финской и Великой Отечественной войны 1941-1945гг', page: 5, coordinates: LatLng(60.184712, 29.818013),),
                 ),
               ),
             );
