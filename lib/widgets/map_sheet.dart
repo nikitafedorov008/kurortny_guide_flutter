@@ -18,6 +18,8 @@ class _MapSheetState extends State<MapSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 200,
+      width: 200,
       child: Column(
         children: [
           Text(widget.name),

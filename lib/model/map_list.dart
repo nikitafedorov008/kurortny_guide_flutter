@@ -3,7 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kurortny_guide_flutter/widgets/map_sheet.dart';
 
 //show bottom sheet
-showMapSheet(context, LatLng coordinates, String name) {
+/*showMapSheet(context, LatLng coordinates, String name) {
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.transparent,
@@ -22,7 +22,7 @@ showMapSheet(context, LatLng coordinates, String name) {
       );
     },
   );
-}
+}*/
 
 //icons for lists
 BitmapDescriptor museumIcon = BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta);
