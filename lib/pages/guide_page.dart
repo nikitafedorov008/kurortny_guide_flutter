@@ -10,11 +10,13 @@ class _GuidePageState extends State<GuidePage> {
 
   bool _isLoading = true;
   PDFDocument document;
+  PDFPage page;
 
   @override
   void initState() {
     super.initState();
     loadDocument();
+    openPage(4);
   }
 
   loadDocument() async {
@@ -24,8 +26,9 @@ class _GuidePageState extends State<GuidePage> {
 
   void openPage(_number) async {
     // Load specific page
-    PDFPage page = await document.get(page: _number);
+    page = await document.get(page: _number);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +41,61 @@ class _GuidePageState extends State<GuidePage> {
         ),
       ),
       body: Center(
-          child: _isLoading ? CircularProgressIndicator() : PDFViewer(
-            document: document,
-            showPicker: true,
-            enableSwipeNavigation: true,
-            showIndicator: true,
-            showNavigation: true,
-            zoomSteps: 1,
-            indicatorBackground: Colors.redAccent,
-            pickerButtonColor: Colors.redAccent,
-          ),
+        child: _isLoading
+            ? Center(child: CircularProgressIndicator())
+            : PDFViewer(
+          document: document,
+          zoomSteps: 1,
+          //uncomment below line to preload all pages
+           lazyLoad: false,
+          // uncomment below line to scroll vertically
+           //scrollDirection: Axis.horizontal,
+          //swipe navigation
+          //enableSwipeNavigation: true,
+          //uncomment below code to replace bottom navigation with your own
+          showNavigation: true,
+          indicatorBackground: Colors.redAccent,
+          pickerButtonColor: Colors.redAccent,
+          navigationBuilder: (context, page, totalPages, jumpToPage, animateToPage) {
+                    return BottomAppBar(
+                      shape: CircularNotchedRectangle(),
+                      notchMargin: 6,
+                      clipBehavior: Clip.antiAlias,
+                      child: ButtonBar(
+                          alignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            IconButton(
+                              icon: Icon(Icons.first_page),
+                              onPressed: () {
+                                jumpToPage(page: 0);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.arrow_back),
+                              onPressed: () {
+                                animateToPage(page: page - 2);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.arrow_forward, color: Colors.transparent,),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.arrow_forward),
+                              onPressed: () {
+                                animateToPage(page: page);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.last_page),
+                              onPressed: () {
+                                jumpToPage(page: totalPages - 1);
+                              },
+                            ),
+                          ],
+                      ),
+                    );
+                  },
+        ),
       ),
     );
   }

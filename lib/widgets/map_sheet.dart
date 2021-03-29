@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kurortny_guide_flutter/pages/guide_page.dart';
+import 'package:kurortny_guide_flutter/pages/place_page.dart';
 import 'package:kurortny_guide_flutter/utilities/launch_taxi.dart';
 
 class MapSheet extends StatefulWidget {
@@ -29,7 +30,7 @@ class _MapSheetState extends State<MapSheet> {
               widget.name,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                fontSize: 32,
+                fontSize: 30,
                 fontWeight: FontWeight.w800,
               ),
             ),
@@ -40,28 +41,9 @@ class _MapSheetState extends State<MapSheet> {
               OutlineButton(
                 color: Colors.cyan,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
-                child: Container(
-                  width: 104,
-                  child: Row(
-                    children: [
-                      Icon(Icons.book),
-                      Text('Подробнее'),
-                    ],
-                  ),
-                ),
-                onPressed: ()=> Navigator.push(context,
-                  MaterialPageRoute(
-                    builder: (_) => GuidePage(),
-                  ),
-                ),
-              ),
-              SizedBox(width: 4,),
-              OutlineButton(
-                color: Colors.cyan,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
-                child: Container(
-                  width: 90,
-                  child: Row(
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Column(
                     children: [
                       Icon(Icons.navigation),
                       Text('Маршрут'),
@@ -70,13 +52,32 @@ class _MapSheetState extends State<MapSheet> {
                 ),
                 onPressed:()=> launchYandexTaxi(widget.coordinates),
               ),
-              SizedBox(width: 4,),
+              SizedBox(width: 8,),
               OutlineButton(
                 color: Colors.cyan,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
-                child: Container(
-                  width: 80,
-                  child: Row(
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Column(
+                    children: [
+                      Icon(Icons.book),
+                      Text('Подробнее'),
+                    ],
+                  ),
+                ),
+                onPressed: ()=> Navigator.push(context,
+                  MaterialPageRoute(
+                    builder: (_) => PlacePage(page: widget.page,),
+                  ),
+                ),
+              ),
+              SizedBox(width: 8,),
+              OutlineButton(
+                color: Colors.cyan,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Column(
                     children: [
                       Icon(Icons.link_sharp),
                       Text('Ссылки'),

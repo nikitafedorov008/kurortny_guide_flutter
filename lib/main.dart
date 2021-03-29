@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
-      title: 'Kurortny',
+      title: 'Курортный район',
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
-      home: HomePage(title: 'Kurortny'),
+      home: HomePage(title: 'Курортный район'),
     );
   }
 }

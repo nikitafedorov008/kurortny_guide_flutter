@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kurortny_guide_flutter/model/map_list.dart';
 import 'package:kurortny_guide_flutter/pages/home_page.dart';
+import 'package:kurortny_guide_flutter/pages/place_page.dart';
 import 'package:kurortny_guide_flutter/widgets/map_sheet.dart';
 
 Completer<GoogleMapController> _controller = Completer();
@@ -24,8 +25,35 @@ class _MapPageState extends State<MapPage> {
         title: Text("Карта"),
         actions: [
           IconButton(
-              //onPressed: onPressed,
-              icon: Icon(Icons.settings, color: Colors.cyan,),
+            icon: Icon(Icons.settings, color: Colors.cyan,),
+            onPressed: ()=> showDialog(
+                context: context,
+                builder: (BuildContext buildContext){
+                  return SimpleDialog(
+                    title: Text('Выберите фильтры'),
+                    children: [
+                      SimpleDialogOption(
+                        child: Row(
+                          children: [
+                            Icon(Icons.museum),
+                            SizedBox(width: 2,),
+                            Text('Музеи'),
+                          ],
+                        ),
+                      ),
+                      SimpleDialogOption(
+                        child: Row(
+                          children: [
+                            Icon(Icons.change_history_rounded),
+                            SizedBox(width: 2,),
+                            Text('Религия'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                }
+            ),
           ),
         ],
       ),
@@ -188,6 +216,27 @@ List<Marker> militaryList = [
 
 Widget _googleMaps(BuildContext context) {
 
+  showMapSheet(LatLng coordinates, String name, int page) {
+    return showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context){
+        return Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            child: Container(
+              height: 200,
+              child: Expanded(child: MapSheet(coordinates: coordinates, name: name, page: page,)),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   List<Marker> religionList = [
     Marker(
       markerId: MarkerId("1"),
@@ -214,7 +263,7 @@ Widget _googleMaps(BuildContext context) {
         icon: religionIcon,
         onTap: ()=> Navigator.push(context,
           MaterialPageRoute(
-            builder: (_) => HomePage(),
+            builder: (_) => PlacePage(),
           ),
         ),
     ),
@@ -231,7 +280,7 @@ Widget _googleMaps(BuildContext context) {
       icon: religionIcon,
       onTap: ()=> Navigator.push(context,
         MaterialPageRoute(
-          builder: (_) => HomePage(),
+          builder: (_) => PlacePage(),
         ),
       ),
     ),
@@ -332,6 +381,7 @@ Widget _googleMaps(BuildContext context) {
       position: LatLng(60.099072, 30.213370),
       infoWindow: InfoWindow(title: "Военный мемориал и памятник дважды Герою СССР А. Т. Карпова"),
       icon: militaryIcon,
+      onTap:(){ showMapSheet(LatLng(60.099072, 30.213370), 'Военный мемориал и памятник дважды Герою СССР А. Т. Карпова', 5);}
     ),
     Marker(
       markerId: MarkerId("4"),
@@ -365,27 +415,6 @@ Widget _googleMaps(BuildContext context) {
     ),
   ];
 
-
-  showMapSheet(LatLng coordinates, String name) {
-    return showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (BuildContext context){
-        return Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16.0),
-            ),
-            child: Container(
-              height: 200,
-              child: Expanded(child: MapSheet()),
-            ),
-          ),
-        );
-      },
-    );
-  }
 
   return Container(
     height: MediaQuery.of(context).size.height,
