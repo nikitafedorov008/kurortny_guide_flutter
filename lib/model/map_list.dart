@@ -1,28 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:kurortny_guide_flutter/widgets/map_sheet.dart';
-
-//show bottom sheet
-/*showMapSheet(context, LatLng coordinates, String name) {
-  showModalBottomSheet(
-    context: context,
-    backgroundColor: Colors.transparent,
-    builder: (BuildContext context){
-      return Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          child: Container(
-            height: 700,
-            child: Expanded(child: MapSheet()),
-          ),
-        ),
-      );
-    },
-  );
-}*/
 
 //icons for lists
 BitmapDescriptor museumIcon = BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta);

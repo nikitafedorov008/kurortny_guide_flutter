@@ -149,6 +149,148 @@ class _HomePageState extends State<HomePage> {
                     boxShadow: [BoxShadow(blurRadius: 32,color: Colors.cyan,offset: Offset(1,3))]// make rounded corner of border
                 ),
                 child: MaterialButton(
+                  /*onPressed: ()=> showModalBottomSheet(
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      builder: (BuildContext context) {
+                        return Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                            ),
+                            child: OrientationBuilder(
+                                builder: (context, orientation) {
+                                  //height: orientation == Orientation.portrait ? 320 : 220,
+                                  return Container(
+                                    height: 360,
+                                    child: ListView(
+                                      physics: BouncingScrollPhysics(),
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            16.0, 12.0, 16.0, 12.0,),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: <Widget>[
+                                              new Text('Выберите категорию', style: TextStyle(
+                                                  fontFamily: 'ProductSans',
+                                                  fontSize: 18.0),),
+                                              MaterialButton(
+                                                child: Row(
+                                                  children: <Widget>[
+                                                    Icon(Icons.cancel, color: Colors.red,),
+                                                    SizedBox(width: 4,),
+                                                    Text('Отмена', style: TextStyle(fontFamily: 'ProductSans', color: Colors.red),),
+                                                  ],
+                                                ),
+                                                onPressed: ()=> Navigator.pop(context),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.museum),
+                                          title: Text('Музеи', style: TextStyle(
+                                              fontFamily: 'ProductSans'),),
+                                          subtitle: Text('museums', style: TextStyle(
+                                              fontFamily: 'ProductSans'),),
+                                          onTap: () {
+                                            //_category = 'Videogame Asset';
+                                            setState(() {});
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.add_rounded),
+                                          title: Text('Религия', style: TextStyle(
+                                              fontFamily: 'ProductSans'),),
+                                          subtitle: Text('religion',
+                                            style: TextStyle(fontFamily: 'ProductSans'),),
+                                          onTap: () {
+                                            //_category = 'Gadgets';
+                                            setState(() {});
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.military_tech),
+                                          title: Text('Военные объекты', style: TextStyle(
+                                              fontFamily: 'ProductSans'),),
+                                          subtitle: Text(
+                                            'military',
+                                            style: TextStyle(fontFamily: 'ProductSans'),),
+                                          onTap: () {
+                                            //_category = 'Electronics';
+                                            setState(() {});
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.account_box),
+                                          title: Text('Памятники', style: TextStyle(
+                                              fontFamily: 'ProductSans'),),
+                                          subtitle: Text(
+                                            'monuments',
+                                            style: TextStyle(fontFamily: 'ProductSans'),),
+                                          onTap: () {
+                                            //_category = 'Childrens things';
+                                            setState(() {});
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.food_bank),
+                                          title: Text('Рестораны', style: TextStyle(
+                                              fontFamily: 'ProductSans'),),
+                                          subtitle: Text(
+                                            'food',
+                                            style: TextStyle(fontFamily: 'ProductSans'),),
+                                          onTap: () {
+                                            //_category = 'Childrens things';
+                                            setState(() {});
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.hotel),
+                                          title: Text('Отели и санатории', style: TextStyle(
+                                              fontFamily: 'ProductSans'),),
+                                          subtitle: Text(
+                                            'hotel',
+                                            style: TextStyle(fontFamily: 'ProductSans'),),
+                                          onTap: () {
+                                            //_category = 'Childrens things';
+                                            setState(() {});
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                        ListTile(
+                                          leading: Icon(Icons.article),
+                                          title: Text('Все места', style: TextStyle(
+                                              fontFamily: 'ProductSans'),),
+                                          subtitle: Text(
+                                            'all',
+                                            style: TextStyle(fontFamily: 'ProductSans'),),
+                                          onTap: () {
+                                            //_category = 'Childrens things';
+                                            setState(() {});
+                                            Navigator.pop(context);
+                                            Navigator.push(context,
+                                              MaterialPageRoute(
+                                                builder: (_) => MapPage(),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }),
+                          ),
+                        );
+                      }
+                  ),*/
                   onPressed: ()=> Navigator.push(context,
                     MaterialPageRoute(
                       builder: (_) => MapPage(),

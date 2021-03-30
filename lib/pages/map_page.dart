@@ -3,18 +3,21 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kurortny_guide_flutter/model/map_list.dart';
-import 'package:kurortny_guide_flutter/pages/home_page.dart';
 import 'package:kurortny_guide_flutter/pages/place_page.dart';
+import 'package:kurortny_guide_flutter/widgets/map_filter.dart';
 import 'package:kurortny_guide_flutter/widgets/map_sheet.dart';
 
 Completer<GoogleMapController> _controller = Completer();
 
 class MapPage extends StatefulWidget {
+
   @override
   _MapPageState createState() => _MapPageState();
 }
 
 class _MapPageState extends State<MapPage> {
+
+  bool isMuseumChecked = true;
 
   @override
   Widget build(BuildContext context) {
@@ -29,29 +32,7 @@ class _MapPageState extends State<MapPage> {
             onPressed: ()=> showDialog(
                 context: context,
                 builder: (BuildContext buildContext){
-                  return SimpleDialog(
-                    title: Text('Выберите фильтры'),
-                    children: [
-                      SimpleDialogOption(
-                        child: Row(
-                          children: [
-                            Icon(Icons.museum),
-                            SizedBox(width: 2,),
-                            Text('Музеи'),
-                          ],
-                        ),
-                      ),
-                      SimpleDialogOption(
-                        child: Row(
-                          children: [
-                            Icon(Icons.change_history_rounded),
-                            SizedBox(width: 2,),
-                            Text('Религия'),
-                          ],
-                        ),
-                      ),
-                    ],
-                  );
+                  return MapFilter();
                 }
             ),
           ),
@@ -379,9 +360,12 @@ Widget _googleMaps(BuildContext context) {
     Marker(
       markerId: MarkerId("3"),
       position: LatLng(60.099072, 30.213370),
-      infoWindow: InfoWindow(title: "Военный мемориал и памятник дважды Герою СССР А. Т. Карпова"),
+      infoWindow: InfoWindow(
+          title: "Военный мемориал и памятник дважды Герою СССР А. Т. Карпова",
+          snippet: 'Военнный объект'
+      ),
       icon: militaryIcon,
-      onTap:(){ showMapSheet(LatLng(60.099072, 30.213370), 'Военный мемориал и памятник дважды Герою СССР А. Т. Карпова', 5);}
+      onTap:(){ showMapSheet(LatLng(60.099072, 30.213370), 'Военный мемориал и памятник дважды Герою СССР А. Т. Карпова', 110);}
     ),
     Marker(
       markerId: MarkerId("4"),
@@ -415,11 +399,19 @@ Widget _googleMaps(BuildContext context) {
     ),
   ];
 
+  markersView(){
+    return Set<Marker>.of(
+        museumList
+            + religionList
+            + militaryList
+    );
+  }
 
   return Container(
     height: MediaQuery.of(context).size.height,
     width: MediaQuery.of(context).size.width,
     child: GoogleMap(
+      compassEnabled: true,
       myLocationButtonEnabled: true,
       myLocationEnabled: true,
       mapType: MapType.normal,
@@ -429,11 +421,7 @@ Widget _googleMaps(BuildContext context) {
         _controller.complete(controller);
       },
       //markers: {m1, m2, m3},
-      markers: Set<Marker>.of(
-          museumList
-              + religionList
-              + militaryList
-      ),
+      markers: markersView(),
     ),
   );
 }

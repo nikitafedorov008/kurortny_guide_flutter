@@ -22,18 +22,21 @@ class _PlacePageState extends State<PlacePage> {
   void initState() {
     super.initState();
     loadDocument();
-    openPage(4);
-    //_pageController.animateToPage(widget.page);
+    openPage(widget.page);
+    //Future.delayed(new Duration(seconds: 3000000000000));
+    //_pageController.jumpToPage(widget.page);
     //_scrollController.jumpTo(50.0);
   }
 
   loadDocument() async {
     document = await PDFDocument.fromAsset('assets/guide_rus_small.pdf');
+    //_pageController.animateToPage(widget.page);
     setState(() => _isLoading = false);
   }
 
   void openPage(_number) async {
     // Load specific page
+    _pageController.jumpToPage(widget.page);
     page = await document.get(page: _number);
   }
 
@@ -58,7 +61,7 @@ class _PlacePageState extends State<PlacePage> {
           //uncomment below line to preload all pages
           lazyLoad: false,
           // uncomment below line to scroll vertically
-          scrollDirection: Axis.vertical,
+          scrollDirection: Axis.horizontal,
           //swipe navigation
           enableSwipeNavigation: false,
           //uncomment below code to replace bottom navigation with your own
@@ -69,12 +72,33 @@ class _PlacePageState extends State<PlacePage> {
           pickerButtonColor: Colors.redAccent,
           navigationBuilder: (context, page, totalPages, jumpToPage, animateToPage) {
             //jumpToPage(page: widget.page);
-            return TextButton(
-              child: Container(
-                height: 40,
-                  child: Text('Открыть страницу места')
+            return BottomAppBar(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      animateToPage(page: page - 2);
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                        'Открыть страницу места',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                      onPressed:()=> jumpToPage(page: widget.page),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.arrow_forward),
+                    onPressed: () {
+                      animateToPage(page: page);
+                    },
+                  ),
+                ],
               ),
-                onPressed:()=> jumpToPage(page: widget.page),
             );
           },
         ),
