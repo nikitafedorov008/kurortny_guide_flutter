@@ -20,7 +20,7 @@ class _GuidePageState extends State<GuidePage> {
   }
 
   loadDocument() async {
-    document = await PDFDocument.fromAsset('assets/guide_rus_small.pdf');
+    document = await PDFDocument.fromAsset('assets/guide.pdf');
     setState(() => _isLoading = false);
   }
 
