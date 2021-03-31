@@ -29,7 +29,7 @@ class _PlacePageState extends State<PlacePage> {
   }
 
   loadDocument() async {
-    document = await PDFDocument.fromAsset('assets/guide_rus_small.pdf');
+    document = await PDFDocument.fromAsset('assets/guide.pdf');
     //_pageController.animateToPage(widget.page);
     setState(() => _isLoading = false);
   }
