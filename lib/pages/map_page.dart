@@ -30,6 +30,7 @@ class _MapPageState extends State<MapPage> {
       final MapMarker marker = MapMarker(
           location['Location_Name'],
           location['Location_Type'],
+          location['Location_Url'],
           location['Location_Page'],
           id: MarkerId(location['Location_Number']),
           lat: location['coordinates'][1],
@@ -48,6 +49,7 @@ class _MapPageState extends State<MapPage> {
                   child: Expanded(
                     child: MapSheet(
                       name: location['Location_Name'],
+                      url: location['Location_Url'],
                       page: location['Location_Page'],
                       coordinates: LatLng(
                         location['coordinates'][1],

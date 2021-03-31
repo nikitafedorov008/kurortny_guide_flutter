@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:kurortny_guide_flutter/pages/guide_page.dart';
 import 'package:kurortny_guide_flutter/pages/place_page.dart';
+import 'package:kurortny_guide_flutter/utilities/launch_route.dart';
 import 'package:kurortny_guide_flutter/utilities/launch_taxi.dart';
+import 'package:kurortny_guide_flutter/utilities/launch_url.dart';
+import 'package:map_launcher/map_launcher.dart';
 
 class MapSheet extends StatefulWidget {
-  MapSheet({this.name, this.page, this.coordinates});
+  MapSheet({this.name, this.url, this.page, this.coordinates});
 
   final String name;
+  final String url;
   final int page;
   final LatLng coordinates;
 
@@ -50,7 +53,7 @@ class _MapSheetState extends State<MapSheet> {
                     ],
                   ),
                 ),
-                onPressed:()=> launchYandexTaxi(widget.coordinates),
+                onPressed:() {launchRoute(widget.coordinates, widget.name,);},
               ),
               SizedBox(width: 8,),
               OutlineButton(
@@ -84,7 +87,7 @@ class _MapSheetState extends State<MapSheet> {
                     ],
                   ),
                 ),
-                onPressed:()=> launchYandexTaxi(widget.coordinates),
+                onPressed:()=> launchURL(widget.url),
               ),
             ],
           ),
