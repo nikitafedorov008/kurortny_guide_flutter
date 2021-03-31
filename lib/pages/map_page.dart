@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kurortny_guide_flutter/model/map_list.dart';
+import 'package:kurortny_guide_flutter/widgets/map_filter.dart';
 import 'package:kurortny_guide_flutter/widgets/map_sheet.dart';
 
 class MapPage extends StatefulWidget {
@@ -72,8 +73,13 @@ class _MapPageState extends State<MapPage> {
         title: Text('Карта'),
         actions: [
           IconButton(
-            //onPressed: onPressed,
             icon: Icon(Icons.settings, color: Colors.cyan,),
+            onPressed: ()=> showDialog(
+                context: context,
+                builder: (BuildContext buildContext){
+                  return MapFilter();
+                }
+            ),
           ),
         ],
       ),
