@@ -1,9 +1,9 @@
-import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kurortny_guide_flutter/model/map_list.dart';
-import 'package:kurortny_guide_flutter/widgets/map_filter.dart';
+import 'package:kurortny_guide_flutter/model/map_marker.dart';
 import 'package:kurortny_guide_flutter/widgets/map_sheet.dart';
 
 class MapPage extends StatefulWidget {
@@ -14,6 +14,7 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   GoogleMapController mapController;
   Set<MapMarker> markersList = new Set();
+  List<bool> _isSwitched = [true, true];
   
   BitmapDescriptor markerIcon(String type) {
     if(type == 'museum') {
@@ -25,7 +26,25 @@ class _MapPageState extends State<MapPage> {
     }
   }
 
-  void _addMarkers() {
+  changeMarkers() {
+    if (_isSwitched[0] == true) {
+      setState(() {
+        _addMarkers(museum_locations);
+      });
+    }
+    if (_isSwitched[1] == true){
+      setState(() {
+        _addMarkers(military_locations);
+      });
+    }
+  }
+
+  onStartMarkers(){
+    _addMarkers(museum_locations);
+    _addMarkers(military_locations);
+  }
+
+  void _addMarkers(List<Map<String, dynamic>> locations) {
     locations.forEach((Map<String, dynamic> location) {
       final MapMarker marker = MapMarker(
           location['Location_Name'],
@@ -66,6 +85,57 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
+  Widget myPopMenu() {
+    return PopupMenuButton(
+        onSelected: (value) {
+          Fluttertoast.showToast(
+              msg: "You have selected " + value.toString(),
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.black,
+              textColor: Colors.white,
+              fontSize: 16.0
+          );
+        },
+        itemBuilder: (context) => [
+          PopupMenuItem(
+              value: 1,
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                    child: Icon(Icons.print),
+                  ),
+                  Text('Print')
+                ],
+              )),
+          PopupMenuItem(
+              value: 2,
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                    child: Icon(Icons.share),
+                  ),
+                  Text('Share')
+                ],
+              )),
+          PopupMenuItem(
+              value: 3,
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                    child: Icon(Icons.add_circle),
+                  ),
+                  Text('Add')
+                ],
+              )),
+        ]);
+  }
+
+  var mapType = MapType.normal;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,14 +144,121 @@ class _MapPageState extends State<MapPage> {
         elevation: 0,
         title: Text('Карта'),
         actions: [
-          IconButton(
+          PopupMenuButton(
             icon: Icon(Icons.settings, color: Colors.cyan,),
-            onPressed: ()=> showDialog(
-                context: context,
-                builder: (BuildContext buildContext){
-                  return MapFilter();
-                }
-            ),
+            itemBuilder: (BuildContext buildContext) => [
+              /*PopupMenuItem(
+                value: "/military",
+                child: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter stateSetter) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.article_outlined),
+                        Text('Все места'),
+                        Switch(
+                          activeColor: Colors.grey,
+                          value: _isSwitched[1],
+                          onChanged: (val) {
+                            stateSetter(() {
+                              _isSwitched[0] = val;
+                              _isSwitched[1] = val;
+                              setState(() {
+                                markersList.clear();
+                                changeMarkers();
+                              });
+                              Navigator.pop(context);
+                              //changeMarkers();
+                            });
+                          },),
+                      ],
+                    );
+                  },
+                ),
+              ),*/
+              PopupMenuItem(
+              value: "/museum",
+                child: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter stateSetter) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.museum),
+                        Text('Музеи'),
+                        Switch(
+                          activeColor: Colors.blue,
+                          value: _isSwitched[0],
+                          onChanged: (val) {
+                            stateSetter(() {
+                              _isSwitched[0] = val;
+                              setState(() {
+                                markersList.clear();
+                              });
+                              changeMarkers();
+                            });
+                          },),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+                value: "/military",
+                child: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter stateSetter) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.military_tech),
+                        Text('Военные'),
+                        Switch(
+                          activeColor: Colors.red,
+                          value: _isSwitched[1],
+                          onChanged: (val) {
+                            stateSetter(() {
+                              _isSwitched[1] = val;
+                              setState(() {
+                                markersList.clear();
+                                changeMarkers();
+                              });
+                              //changeMarkers();
+                            });
+                          },),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+                  child: TextButton(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Icon(Icons.map),
+                        Text('Поменять стиль карты'),
+                      ],
+                    ),
+                    onPressed: (){
+                      if (mapType == MapType.hybrid) {
+                        setState(() {
+                          this.mapType = MapType.normal;
+                          // markersList.toSet();
+                        });
+                      }  else {
+                        setState(() {
+                          this.mapType = MapType.hybrid;
+                          // markersList.toSet();
+                        });
+                      }
+                    },
+                  ),
+              ),
+            ],
+            onSelected: (route) {
+              print(route);
+              // Note You must create respective pages for navigation
+              Navigator.pushNamed(context, route);
+            },
           ),
         ],
       ),
@@ -93,10 +270,11 @@ class _MapPageState extends State<MapPage> {
           compassEnabled: false,
           myLocationButtonEnabled: true,
           zoomControlsEnabled: true,
+          mapType: mapType,
           mapToolbarEnabled: true,
           indoorViewEnabled: true,
-          mapType: MapType.normal,
-          markers: markersList.toSet()),
+          markers: markersList.toSet(),
+      ),
     );
   }
 
@@ -104,7 +282,7 @@ class _MapPageState extends State<MapPage> {
     setState(() {
       mapController = controller;
     });
-    _addMarkers();
+    onStartMarkers();
 
     LatLngBounds _bounds = FindBoundsCoordinates().getBounds(markersList);
 

@@ -44,9 +44,9 @@ dependencies:
   intro_slider: ^2.3.4
   page_view_indicators: ^2.0.0
   imagebutton: ^0.0.6
+  fluttertoast: ^8.0.3
   #utils
   url_launcher: ^6.0.3
-  shared_preferences: ^0.5.12+4
 
 dev_dependencies:
   flutter_test:
