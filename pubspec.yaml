@@ -41,7 +41,9 @@ dependencies:
   introduction_screen: ^2.0.0
   intro_slider: ^2.3.4
   page_view_indicators: ^2.0.0
+  smooth_page_indicator: ^0.2.3
   imagebutton: ^0.0.6
+  fluttertoast: ^8.0.3
   #utils
   url_launcher: ^6.0.3
 
