@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+import 'package:pdf_render/pdf_render.dart';
+import 'package:pdf_render/pdf_render_widgets2.dart';
 
 class PlacePage extends StatefulWidget {
   PlacePage({this.page});
@@ -11,98 +13,74 @@ class PlacePage extends StatefulWidget {
 }
 
 class _PlacePageState extends State<PlacePage> {
-
-  bool _isLoading = true;
-  PDFDocument document;
-  PDFPage page;
-  PageController _pageController = PageController();
-  ScrollController _scrollController = ScrollController();
+  final controller = PdfViewerController();
 
   @override
-  void initState() {
-    super.initState();
-    loadDocument();
-    openPage(widget.page);
-    //Future.delayed(new Duration(seconds: 3000000000000));
-    //_pageController.jumpToPage(widget.page);
-    //_scrollController.jumpTo(50.0);
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
-
-  loadDocument() async {
-    document = await PDFDocument.fromAsset('assets/guide.pdf');
-    //_pageController.animateToPage(widget.page);
-    setState(() => _isLoading = false);
-  }
-
-  void openPage(_number) async {
-    // Load specific page
-    _pageController.jumpToPage(widget.page);
-    page = await document.get(page: _number);
-  }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text('Подробнее',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-        ),
-      ),
-      body: Center(
-        child: _isLoading
-            ? Center(child: CircularProgressIndicator())
-            : PDFViewer(
-          controller: _pageController,
-          document: document,
-          zoomSteps: 1,
-          //uncomment below line to preload all pages
-          lazyLoad: false,
-          // uncomment below line to scroll vertically
-          scrollDirection: Axis.horizontal,
-          //swipe navigation
-          enableSwipeNavigation: false,
-          //uncomment below code to replace bottom navigation with your own
-          showNavigation: true,
-          indicatorBackground: Colors.redAccent,
-          showPicker: false,
-          showIndicator: false,
-          pickerButtonColor: Colors.redAccent,
-          navigationBuilder: (context, page, totalPages, jumpToPage, animateToPage) {
-            //jumpToPage(page: widget.page);
-            return BottomAppBar(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () {
-                      animateToPage(page: page - 2);
-                    },
-                  ),
-                  TextButton(
-                    child: Text(
-                        'Открыть страницу места',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                      onPressed:()=> jumpToPage(page: widget.page),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.arrow_forward),
-                    onPressed: () {
-                      animateToPage(page: page);
-                    },
-                  ),
-                ],
+        appBar: new AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: ValueListenableBuilder<Object>(
+            // The controller is compatible with ValueListenable<Matrix4> and you can receive notifications on scrolling and zooming of the view.
+              valueListenable: controller,
+              builder: (context, _, child) => Text(controller.isReady ? 'Страница №${controller.currentPageNumber}' : 'Страница -',
               ),
-            );
-          },
+          ),
         ),
-      ),
+        backgroundColor: Colors.grey,
+        /*body: PdfDocumentLoader(
+          assetName: 'assets/guide.pdf',
+          documentBuilder: (context, pdfDocument, pageCount)=> LayoutBuilder(
+              builder: (context, constraints) => ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: pageCount,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) => Container(
+                      margin: EdgeInsets.all(12),
+                      padding: EdgeInsets.all(2),
+                      color: Colors.black12,
+                      child: PdfPageView(
+                        pdfDocument: pdfDocument,
+                        pageNumber: index + 1,
+                      )
+                  ),
+              ),
+          ),
+        ),*/
+        body: PdfViewer(
+          //scaleEnabled: true,
+          pageNumber: widget.page,
+          assetName: 'assets/guide.pdf',
+          padding: 8,
+          maxScale: 0.3,
+          minScale: 0.1,
+          viewerController: controller,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              FloatingActionButton(
+                  heroTag: 'firstPage',
+                  backgroundColor: Colors.red,
+                  child: Icon(Icons.arrow_back),
+                  onPressed: () => controller?.goToPage(pageNumber: controller.currentPageNumber - 1),
+              ),
+              FloatingActionButton(
+                  heroTag: 'lastPage',
+                  backgroundColor: Colors.red,
+                  child: Icon(Icons.arrow_forward),
+                  onPressed: () => controller?.goToPage(pageNumber: controller.currentPageNumber + 1),
+              ),
+            ]
+        )
     );
   }
 }

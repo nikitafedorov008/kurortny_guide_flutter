@@ -16,17 +16,11 @@ class _GuidePageState extends State<GuidePage> {
   void initState() {
     super.initState();
     loadDocument();
-    openPage(4);
   }
 
   loadDocument() async {
     document = await PDFDocument.fromAsset('assets/guide.pdf');
     setState(() => _isLoading = false);
-  }
-
-  void openPage(_number) async {
-    // Load specific page
-    page = await document.get(page: _number);
   }
 
 
