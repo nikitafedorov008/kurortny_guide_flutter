@@ -149,8 +149,8 @@ class _IntroPageState extends State<IntroPage> {
                       'видеообращение',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 34,
-                      fontWeight: FontWeight.w500
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold
                     ),
                   ),
                 ],
@@ -190,19 +190,22 @@ class _IntroPageState extends State<IntroPage> {
                     'путеводитель',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 36,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
             ),
-            Text(
-              'читайте о популярных\nи малоизвестных местах куртного района',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Text(
+                'читайте о популярных\nи малоизвестных местах куртного района',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
             SizedBox(height: 12,),
@@ -231,8 +234,8 @@ class _IntroPageState extends State<IntroPage> {
                     'карта',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 36,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -245,7 +248,7 @@ class _IntroPageState extends State<IntroPage> {
                 style: TextStyle(
                   color: Colors.white,
                     fontWeight: FontWeight.w500,
-                    fontSize: 22
+                    fontSize: 18
                 ),
               ),
             ),
@@ -332,7 +335,7 @@ class Page extends StatelessWidget {
         children: <Widget>[
           new Container(
             height: MediaQuery.of(context).size.height / 1.28,
-            width: 420,
+            width: MediaQuery.of(context).size.width / .96,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: new Container(

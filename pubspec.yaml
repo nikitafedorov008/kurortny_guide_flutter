@@ -45,6 +45,7 @@ dependencies:
   imagebutton: ^0.0.6
   fluttertoast: ^8.0.3
   #utils
+  shared_preferences: ^0.5.12+4
   url_launcher: ^6.0.3
 
 dev_dependencies:

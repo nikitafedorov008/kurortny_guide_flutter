@@ -1,5 +1,6 @@
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/material.dart';
+import 'package:kurortny_guide_flutter/pages/mark_page.dart';
 
 class GuidePage extends StatefulWidget {
   @override
@@ -33,6 +34,16 @@ class _GuidePageState extends State<GuidePage> {
         title: Text('Путеводитель',
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
         ),
+        actions: [
+          IconButton(
+            onPressed: ()=> Navigator.push(context,
+              MaterialPageRoute(
+                builder: (_) => MarkPage(),
+              ),
+            ),
+              icon: Icon(Icons.bookmark_border),
+          ),
+        ],
       ),
       body: Center(
         child: _isLoading

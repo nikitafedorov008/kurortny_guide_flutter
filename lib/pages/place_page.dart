@@ -28,6 +28,55 @@ class _PlacePageState extends State<PlacePage> {
     super.dispose();
   }
 
+  pdfView() {
+    return PdfDocumentLoader(
+      assetName: 'assets/guide.pdf',
+      documentBuilder: (context, pdfDocument, pageCount)=> LayoutBuilder(
+        builder: (context, constraints) => PageView.builder(
+          //onPageChanged: pageChanged(index),
+          scrollDirection: Axis.horizontal,
+          itemCount: pageCount,
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (context, index) => Center(
+            child: Container(
+                margin: EdgeInsets.all(8),
+                padding: EdgeInsets.all(2),
+                color: Colors.black12,
+                child: PdfPageView(
+                  pageNumber: index + selectedIndex + widget.page,
+                  // pageSize is the PDF page size in pt.
+                  pageBuilder: (context, textureBuilder, pageSize) {
+                    //
+                    // This illustrates how to decorate the page image with other widgets
+                    //
+                    return Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: <Widget>[
+                        // the container adds shadow on each page
+                        Container(
+                          //margin: EdgeInsets.all(margin),
+                          //padding: EdgeInsets.all(padding),
+                            decoration: BoxDecoration(boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 4,
+                                  offset: Offset(2, 2))
+                            ]),
+                            // textureBuilder builds the actual page image
+                            child: textureBuilder()),
+                        // adding page number on the bottom of rendered page
+                        //Text('${index + 1}', style: TextStyle(fontSize: 50))
+                      ],
+                    );
+                  },
+                )
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,52 +92,7 @@ class _PlacePageState extends State<PlacePage> {
         ),
         backgroundColor: Colors.grey,
         ////
-        body: PdfDocumentLoader(
-          assetName: 'assets/guide.pdf',
-          documentBuilder: (context, pdfDocument, pageCount)=> LayoutBuilder(
-              builder: (context, constraints) => PageView.builder(
-                //onPageChanged: pageChanged(index),
-                scrollDirection: Axis.horizontal,
-                itemCount: pageCount,
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, index) => Center(
-                    child: Container(
-                        margin: EdgeInsets.all(8),
-                        padding: EdgeInsets.all(2),
-                        color: Colors.black12,
-                        child: PdfPageView(
-                          pageNumber: index + widget.page,
-                          // pageSize is the PDF page size in pt.
-                          pageBuilder: (context, textureBuilder, pageSize) {
-                            //
-                            // This illustrates how to decorate the page image with other widgets
-                            //
-                            return Stack(
-                              alignment: Alignment.bottomCenter,
-                              children: <Widget>[
-                                // the container adds shadow on each page
-                                Container(
-                                    //margin: EdgeInsets.all(margin),
-                                    //padding: EdgeInsets.all(padding),
-                                    decoration: BoxDecoration(boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black12,
-                                          blurRadius: 4,
-                                          offset: Offset(2, 2))
-                                    ]),
-                                    // textureBuilder builds the actual page image
-                                    child: textureBuilder()),
-                                // adding page number on the bottom of rendered page
-                                //Text('${index + 1}', style: TextStyle(fontSize: 50))
-                              ],
-                            );
-                          },
-                        )
-                    ),
-                  ),
-              ),
-          ),
-        ),
+        body: pdfView(),
         /////
         /*body: PdfViewer(
           //scaleEnabled: true,
@@ -101,8 +105,39 @@ class _PlacePageState extends State<PlacePage> {
           minScale: 0.1,
           viewerController: controller,
         ),*/
+      //TODO make navigation uding onPageChanged
         bottomNavigationBar: BottomAppBar(
-          child: TextButton(child: Text('смахните что-бы перевернуть страницу', style: TextStyle(color: Colors.cyan),),),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  selectedIndex--;
+                  setState(() {
+                    this.pdfView();
+                  });
+                },
+              ),
+              TextButton(child: Text('смахните что-бы перевернуть страницу', style: TextStyle(color: Colors.cyan),),
+              onPressed: () {
+                selectedIndex = widget.page;
+                setState(() {
+                  this.pdfView();
+                });
+              },
+              ),
+              IconButton(
+                icon: Icon(Icons.arrow_forward),
+                onPressed: () {
+                  selectedIndex++;
+                  setState(() {
+                    this.pdfView();
+                  });
+                },
+              ),
+            ],
+          ),
         ),
     );
   }
