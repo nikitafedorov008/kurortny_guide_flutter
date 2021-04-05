@@ -65,15 +65,13 @@ class _MapPageState extends State<MapPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
                   ),
-                  child: Expanded(
-                    child: MapSheet(
-                      name: location['Location_Name'],
-                      url: location['Location_Url'],
-                      page: location['Location_Page'],
-                      coordinates: LatLng(
-                        location['coordinates'][1],
-                        location['coordinates'][0],
-                      ),
+                  child: MapSheet(
+                    name: location['Location_Name'],
+                    url: location['Location_Url'],
+                    page: location['Location_Page'],
+                    coordinates: LatLng(
+                      location['coordinates'][1],
+                      location['coordinates'][0],
                     ),
                   )
                 ),
@@ -263,8 +261,7 @@ class _MapPageState extends State<MapPage> {
         ],
       ),
       body: GoogleMap(
-          initialCameraPosition:
-          CameraPosition(target: LatLng(60.0702,30.1120), zoom: 9),
+          initialCameraPosition: CameraPosition(target: LatLng(60.0702,30.1120), zoom: 9),
           onMapCreated: _onMapCreated,
           myLocationEnabled: true,
           compassEnabled: false,
