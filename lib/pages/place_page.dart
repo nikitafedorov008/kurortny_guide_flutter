@@ -71,8 +71,8 @@ class _PlacePageState extends State<PlacePage> {
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) => Center(
                 child: Container(
-                    margin: EdgeInsets.all(8),
-                    padding: EdgeInsets.all(2),
+                    //margin: EdgeInsets.all(8),
+                    //padding: EdgeInsets.all(2),
                     color: Colors.black12,
                     child: PdfPageView(
                       pageNumber: index + widget.page,
