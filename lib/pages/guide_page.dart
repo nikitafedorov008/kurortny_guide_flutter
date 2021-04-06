@@ -41,7 +41,7 @@ class _GuidePageState extends State<GuidePage> {
                 builder: (_) => MarkPage(),
               ),
             ),
-              icon: Icon(Icons.bookmark_border),
+              icon: Icon(Icons.bookmarks_outlined),
           ),
         ],
       ),
