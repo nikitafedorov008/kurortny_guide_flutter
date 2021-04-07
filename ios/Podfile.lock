@@ -24,8 +24,6 @@ PODS:
     - Flutter
   - path_provider (0.0.1):
     - Flutter
-  - pdf_platform_view (0.5.0):
-    - Flutter
   - pdf_render (0.0.1):
     - Flutter
   - shared_preferences (0.0.1):
@@ -48,7 +46,6 @@ DEPENDENCIES:
   - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
   - map_launcher (from `.symlinks/plugins/map_launcher/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
-  - pdf_platform_view (from `.symlinks/plugins/pdf_platform_view/ios`)
   - pdf_render (from `.symlinks/plugins/pdf_render/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -78,8 +75,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/map_launcher/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
-  pdf_platform_view:
-    :path: ".symlinks/plugins/pdf_platform_view/ios"
   pdf_render:
     :path: ".symlinks/plugins/pdf_render/ios"
   shared_preferences:
@@ -102,7 +97,6 @@ SPEC CHECKSUMS:
   GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
   map_launcher: e325db1261d029ff33e08e03baccffe09593ffea
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
-  pdf_platform_view: 6361f6bae4dda331726a0a96d5e43d5c9c2a324b
   pdf_render: 0b4e1a615aab83ce88b26c57753049424908a755
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904

@@ -1,6 +1,6 @@
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:kurortny_guide_flutter/pages/mark_page.dart';
+import 'package:kurortny_guide_flutter/pages/mark_list_page.dart';
 
 class GuidePage extends StatefulWidget {
   @override
@@ -38,7 +38,7 @@ class _GuidePageState extends State<GuidePage> {
           IconButton(
             onPressed: ()=> Navigator.push(context,
               MaterialPageRoute(
-                builder: (_) => MarkPage(),
+                builder: (_) => MarkListPage(),
               ),
             ),
               icon: Icon(Icons.bookmarks_outlined),

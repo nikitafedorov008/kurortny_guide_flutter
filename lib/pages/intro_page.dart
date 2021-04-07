@@ -179,7 +179,8 @@ class _IntroPageState extends State<IntroPage> {
                       color: Colors.black12,
                       border: Border.all(
                           color: Colors.white,
-                          width: 4),
+                          width: 4,
+                      ),
                       borderRadius: BorderRadius.all(
                           Radius.circular(28)),
                       //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
@@ -326,34 +327,28 @@ class Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: new Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          new Container(
-            height: MediaQuery.of(context).size.height / 1.28,
-            width: MediaQuery.of(context).size.width / .96,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: new Container(
-                child: new Stack(
-                  fit: StackFit.expand,
-                  children: <Widget>[
-                    this.page,
-                    new Material(
-                      type: MaterialType.transparency,
-                      child: new InkWell(onTap: this.onTap),
-                    ),
-                  ],
+    return new Column(
+      mainAxisSize: MainAxisSize.min,
+      //mainAxisAlignment: MainAxisAlignment.center,
+      //crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        new Container(
+          height: MediaQuery.of(context).size.height/1.13,
+          width: MediaQuery.of(context).size.width,
+          child: new Container(
+            child: new Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                this.page,
+                new Material(
+                  type: MaterialType.transparency,
+                  child: new InkWell(onTap: this.onTap),
                 ),
-              ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

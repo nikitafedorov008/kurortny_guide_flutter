@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kurortny_guide_flutter/pages/place_page.dart';
-import 'package:kurortny_guide_flutter/utilities/launch_route.dart';
-import 'package:kurortny_guide_flutter/utilities/launch_taxi.dart';
-import 'package:kurortny_guide_flutter/utilities/launch_url.dart';
-import 'package:map_launcher/map_launcher.dart';
+import 'package:kurortny_guide_flutter/utils/launch_route.dart';
+import 'package:kurortny_guide_flutter/utils/launch_taxi.dart';
+import 'package:kurortny_guide_flutter/utils/launch_url.dart';
 
 class MapSheet extends StatefulWidget {
   MapSheet({this.name, this.url, this.page, this.coordinates});

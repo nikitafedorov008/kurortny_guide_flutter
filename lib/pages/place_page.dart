@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:kurortny_guide_flutter/model/mark.dart';
+import 'package:kurortny_guide_flutter/pages/mark_list_page.dart';
 import 'package:pdf_render/pdf_render_widgets2.dart';
-
-import 'mark_page.dart';
+import 'mark_detail.dart';
 
 class PlacePage extends StatefulWidget {
   PlacePage({this.page});
@@ -14,19 +15,32 @@ class PlacePage extends StatefulWidget {
 class _PlacePageState extends State<PlacePage> {
   PageController _pageController = PageController();
   final controller = PdfViewerController();
-
   int selectedIndex = 0;
+  bool _isLoading = true;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    setState(() => _isLoading = false);
   }
 
   void pageChanged(int index) {
     setState(() {
       selectedIndex = index;
     });
+  }
+
+  void navigateToDetail(Mark mark, String title) async {
+    /*await Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return TodoDetail(todo, title);
+    }));*/
+    await showDialog(
+        context: context,
+        builder: (BuildContext buildContext){
+          return MarkDetail(mark, title);
+        }
+    );
   }
 
   @override
@@ -51,13 +65,13 @@ class _PlacePageState extends State<PlacePage> {
             icon: Icon(Icons.bookmarks_outlined),
             onPressed: ()=> Navigator.push(context,
               MaterialPageRoute(
-                builder: (_) => MarkPage(),
+                builder: (_) => MarkListPage(),
               ),
             ),
           ),
         ],
       ),
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       body: PdfDocumentLoader(
         assetName: 'assets/guide.pdf',
         documentBuilder: (context, pdfDocument, pageCount)=> LayoutBuilder(
@@ -93,7 +107,9 @@ class _PlacePageState extends State<PlacePage> {
                           //Text('${index + 1}', style: TextStyle(fontSize: 50))
                           IconButton(
                             icon: Icon(Icons.bookmark_border),
-                            //onPressed: ,
+                            onPressed: (){
+                              navigateToDetail(Mark('', '', ''), 'Добавить Закладку');
+                            },
                           )
                         ],
                       );
