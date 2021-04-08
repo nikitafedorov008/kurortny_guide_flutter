@@ -108,7 +108,7 @@ class _PlacePageState extends State<PlacePage> {
                           IconButton(
                             icon: Icon(Icons.bookmark_border),
                             onPressed: (){
-                              navigateToDetail(Mark('', '', ''), 'Добавить Закладку');
+                              navigateToDetail(Mark('', '', '${index + widget.page}'), 'Добавить Закладку');
                             },
                           )
                         ],
@@ -125,7 +125,7 @@ class _PlacePageState extends State<PlacePage> {
         tooltip: 'Начало',
         child: Icon(Icons.refresh),
         foregroundColor: Colors.white,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.redAccent,
         onPressed: (){
           _pageController.animateToPage(0, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
         },

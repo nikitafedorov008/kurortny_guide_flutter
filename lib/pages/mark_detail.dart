@@ -68,8 +68,9 @@ class MarkDetailState extends State<MarkDetail> {
 							debugPrint('Something changed in Description Text Field');
 							updateDescription();
 						},
+						keyboardType: TextInputType.number,
 						decoration: InputDecoration(
-								labelText: 'Описание (необязатеьно)',
+								labelText: 'Страница',
 								labelStyle: textStyle,
 								border: OutlineInputBorder(
 										borderRadius: BorderRadius.circular(24.0)
