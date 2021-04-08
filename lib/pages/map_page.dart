@@ -15,7 +15,7 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   GoogleMapController mapController;
   Set<MapMarker> markersList = new Set();
-  List<bool> _isSwitched = [true, true];
+  List<bool> _isSwitched = [true, true, true, true, true, true, true,];
   
   BitmapDescriptor markerIcon(String type) {
     if (type == 'природный объект') {
@@ -29,10 +29,12 @@ class _MapPageState extends State<MapPage> {
     } else if(type == 'музей') {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure);
     } else if(type == 'архитектура') {
-      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta);
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange);
     } else if(type == 'городской объект') {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan);
     } else if(type == 'отдых') {
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose);
+    } else if(type == 'ресторан') {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose);
     } else {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet);
@@ -42,19 +44,49 @@ class _MapPageState extends State<MapPage> {
   changeMarkers() {
     if (_isSwitched[0] == true) {
       setState(() {
+        _addMarkers(nature_locations);
+      });
+    }
+    if (_isSwitched[1] == true) {
+      setState(() {
+        _addMarkers(religion_locations);
+      });
+    }
+    if (_isSwitched[2] == true){
+      setState(() {
+        _addMarkers(military_locations);
+      });
+    }
+    if (_isSwitched[3] == true) {
+      setState(() {
         _addMarkers(museum_locations);
       });
     }
-    if (_isSwitched[1] == true){
+    if (_isSwitched[4] == true) {
       setState(() {
-        _addMarkers(military_locations);
+        _addMarkers(architecture_locations);
+      });
+    }
+    if (_isSwitched[5] == true) {
+      setState(() {
+        _addMarkers(city_locations);
+      });
+    }
+    if (_isSwitched[6] == true) {
+      setState(() {
+        _addMarkers(chill_locations);
       });
     }
   }
 
   onStartMarkers(){
-    _addMarkers(museum_locations);
+    _addMarkers(nature_locations);
+    _addMarkers(religion_locations);
     _addMarkers(military_locations);
+    _addMarkers(museum_locations);
+    _addMarkers(architecture_locations);
+    _addMarkers(city_locations);
+    _addMarkers(chill_locations);
   }
 
   void _addMarkers(List<Map<String, dynamic>> locations) {
@@ -188,24 +220,52 @@ class _MapPageState extends State<MapPage> {
                 ),
               ),*/
               PopupMenuItem(
-              value: "/museum",
+                value: "/nature",
                 child: StatefulBuilder(
                   builder: (BuildContext context, StateSetter stateSetter) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(Icons.museum),
-                        Text('Музеи'),
+                        Icon(Icons.eco),
+                        Text('Природа'),
                         Switch(
-                          activeColor: Colors.blue,
+                          activeColor: Colors.green,
                           value: _isSwitched[0],
                           onChanged: (val) {
                             stateSetter(() {
                               _isSwitched[0] = val;
                               setState(() {
                                 markersList.clear();
+                                changeMarkers();
                               });
-                              changeMarkers();
+                              //changeMarkers();
+                            });
+                          },),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+                value: "/religion",
+                child: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter stateSetter) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.add),
+                        Text('Религия'),
+                        Switch(
+                          activeColor: Colors.deepPurple,
+                          value: _isSwitched[1],
+                          onChanged: (val) {
+                            stateSetter(() {
+                              _isSwitched[1] = val;
+                              setState(() {
+                                markersList.clear();
+                                changeMarkers();
+                              });
+                              //changeMarkers();
                             });
                           },),
                       ],
@@ -224,10 +284,117 @@ class _MapPageState extends State<MapPage> {
                         Text('Военные'),
                         Switch(
                           activeColor: Colors.red,
-                          value: _isSwitched[1],
+                          value: _isSwitched[2],
                           onChanged: (val) {
                             stateSetter(() {
-                              _isSwitched[1] = val;
+                              _isSwitched[2] = val;
+                              setState(() {
+                                markersList.clear();
+                                changeMarkers();
+                              });
+                              //changeMarkers();
+                            });
+                          },),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+              value: "/museum",
+                child: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter stateSetter) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.museum),
+                        Text('Музеи'),
+                        Switch(
+                          activeColor: Colors.blue,
+                          value: _isSwitched[3],
+                          onChanged: (val) {
+                            stateSetter(() {
+                              _isSwitched[3] = val;
+                              setState(() {
+                                markersList.clear();
+                              });
+                              changeMarkers();
+                            });
+                          },),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+                value: "/architecture",
+                child: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter stateSetter) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.architecture),
+                        Text('Архитектура'),
+                        Switch(
+                          activeColor: Colors.amber,
+                          value: _isSwitched[4],
+                          onChanged: (val) {
+                            stateSetter(() {
+                              _isSwitched[4] = val;
+                              setState(() {
+                                markersList.clear();
+                                changeMarkers();
+                              });
+                              //changeMarkers();
+                            });
+                          },),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+                value: "/city",
+                child: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter stateSetter) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.location_city),
+                        Text('Город'),
+                        Switch(
+                          activeColor: Colors.cyan,
+                          value: _isSwitched[5],
+                          onChanged: (val) {
+                            stateSetter(() {
+                              _isSwitched[5] = val;
+                              setState(() {
+                                markersList.clear();
+                                changeMarkers();
+                              });
+                              //changeMarkers();
+                            });
+                          },),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              PopupMenuItem(
+                value: "/chill",
+                child: StatefulBuilder(
+                  builder: (BuildContext context, StateSetter stateSetter) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.airline_seat_individual_suite),
+                        Text('Отдых'),
+                        Switch(
+                          activeColor: Colors.pink,
+                          value: _isSwitched[6],
+                          onChanged: (val) {
+                            stateSetter(() {
+                              _isSwitched[6] = val;
                               setState(() {
                                 markersList.clear();
                                 changeMarkers();
