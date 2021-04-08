@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:kurortny_guide_flutter/model/mark.dart';
 import 'package:kurortny_guide_flutter/pages/mark_detail.dart';
 import 'package:kurortny_guide_flutter/pages/place_page.dart';
@@ -140,7 +141,7 @@ class MarkListPageState extends State<MarkListPage> {
         },
         tooltip: 'Добавить Закладку',
         child: Icon(Icons.add, color: Colors.white,),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: HexColor('#A23457'),
       ),
     );
   }

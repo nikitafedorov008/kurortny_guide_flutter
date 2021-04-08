@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:kurortny_guide_flutter/model/mark.dart';
@@ -52,7 +54,7 @@ class MarkDetailState extends State<MarkDetail> {
 							updateTitle();
 						},
 						decoration: InputDecoration(
-								labelText: 'Назвние',
+								labelText: 'Назвние (обязательно)',
 								labelStyle: textStyle,
 								border: OutlineInputBorder(
 										borderRadius: BorderRadius.circular(24.0)
@@ -83,9 +85,10 @@ class MarkDetailState extends State<MarkDetail> {
 						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 						children: <Widget>[
 							Expanded(
-								child: TextButton(
+								child: OutlineButton(
 									//color: Theme.of(context).primaryColorDark,
 									//textColor: Theme.of(context).primaryColorLight,
+									shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22.0)),
 									child: Row(
 										children: [
 											Icon(Icons.add_circle_outline, color: Colors.green,),
@@ -109,13 +112,12 @@ class MarkDetailState extends State<MarkDetail> {
 							Container(width: 5.0,),
 
 							Expanded(
-								child: TextButton(
+								child: OutlineButton(
 									//color: Theme.of(context).primaryColorDark,
 									//textColor: Theme.of(context).primaryColorLight,
-									style: ButtonStyle(
-										//shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-									),
+									shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22.0)),
 									child: Row(
+										mainAxisAlignment: MainAxisAlignment.center,
 										children: [
 											Icon(Icons.cancel_outlined, color: Colors.red,),
 											SizedBox(width: 2,),
@@ -183,7 +185,7 @@ class MarkDetailState extends State<MarkDetail> {
 		moveToLastScreen();
 
 		if (mark.id == null) {
-			_showAlertDialog('Статус', 'Ни одной закладки не удвлено');
+			_showAlertDialog('Статус', 'Ни одной закладки не удалено');
 			return;
 		}
 

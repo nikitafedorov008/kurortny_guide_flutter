@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:kurortny_guide_flutter/model/map_list.dart';
 import 'package:kurortny_guide_flutter/model/map_marker.dart';
 import 'package:kurortny_guide_flutter/widgets/map_sheet.dart';
@@ -17,10 +18,22 @@ class _MapPageState extends State<MapPage> {
   List<bool> _isSwitched = [true, true];
   
   BitmapDescriptor markerIcon(String type) {
-    if(type == 'museum') {
-      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure);
-    } else if(type == 'military') {
+    if (type == 'природный объект') {
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen);
+    } else if(type == 'религиозный объект') {
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet);
+    } else if(type == 'захоронение') {
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet);
+    } else if(type == 'военный объект') {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed);
+    } else if(type == 'музей') {
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure);
+    } else if(type == 'архитектура') {
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta);
+    } else if(type == 'городской объект') {
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan);
+    } else if(type == 'отдых') {
+      return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose);
     } else {
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet);
     }
@@ -143,7 +156,7 @@ class _MapPageState extends State<MapPage> {
         title: Text('Карта'),
         actions: [
           PopupMenuButton(
-            icon: Icon(Icons.settings, color: Colors.cyan,),
+            icon: Icon(Icons.settings, color: HexColor('#8E9C80'),),
             itemBuilder: (BuildContext buildContext) => [
               /*PopupMenuItem(
                 value: "/military",
@@ -232,8 +245,8 @@ class _MapPageState extends State<MapPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Icon(Icons.map),
-                        Text('Поменять стиль карты'),
+                        Icon(Icons.map, color: HexColor('#8E9C80'),),
+                        Text('Поменять стиль карты', style: TextStyle(color: HexColor('#8E9C80'),),),
                       ],
                     ),
                     onPressed: (){

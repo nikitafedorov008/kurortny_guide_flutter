@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:kurortny_guide_flutter/model/mark.dart';
 import 'package:kurortny_guide_flutter/pages/mark_list_page.dart';
 import 'package:pdf_render/pdf_render_widgets2.dart';
@@ -92,7 +93,7 @@ class _PlacePageState extends State<PlacePage> {
                     pageNumber: index + widget.page + 1,
                     pageBuilder: (context, textureBuilder, pageSize) {
                       return Stack(
-                        alignment: Alignment.bottomCenter,
+                        alignment: Alignment.bottomRight,
                         children: <Widget>[
                           Container(
                             //margin: EdgeInsets.all(margin),
@@ -125,7 +126,7 @@ class _PlacePageState extends State<PlacePage> {
         tooltip: 'Начало',
         child: Icon(Icons.refresh),
         foregroundColor: Colors.white,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: HexColor('#A23457'),
         onPressed: (){
           _pageController.animateToPage(0, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
         },

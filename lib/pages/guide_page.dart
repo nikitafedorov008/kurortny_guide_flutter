@@ -1,5 +1,6 @@
 import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:kurortny_guide_flutter/pages/mark_list_page.dart';
 
 class GuidePage extends StatefulWidget {
@@ -59,8 +60,8 @@ class _GuidePageState extends State<GuidePage> {
           //enableSwipeNavigation: true,
           //uncomment below code to replace bottom navigation with your own
           showNavigation: true,
-          indicatorBackground: Colors.redAccent,
-          pickerButtonColor: Colors.redAccent,
+          indicatorBackground: HexColor('#A23457'),
+          pickerButtonColor: HexColor('#A23457'),
           navigationBuilder: (context, page, totalPages, jumpToPage, animateToPage) {
                     return BottomAppBar(
                       shape: CircularNotchedRectangle(),
