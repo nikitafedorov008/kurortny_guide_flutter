@@ -80,7 +80,7 @@ class MarkListPageState extends State<MarkListPage> {
           child: ListTile(
             leading: CircleAvatar(
               foregroundColor: Colors.black45,
-              backgroundColor: Colors.cyan,
+              backgroundColor: Colors.grey,
               child: Text(getFirstLetter(this.markList[position].title),
                   style: TextStyle(fontWeight: FontWeight.bold)),
             ),
@@ -134,7 +134,7 @@ class MarkListPageState extends State<MarkListPage> {
         elevation: 0,
       ),
       body: getTodoListView(),
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint('FAB нажата');
           navigateToDetail(Mark('', '', ''), 'Добавить закладку');
@@ -142,7 +142,7 @@ class MarkListPageState extends State<MarkListPage> {
         tooltip: 'Добавить Закладку',
         child: Icon(Icons.add, color: Colors.white,),
         backgroundColor: HexColor('#A23457'),
-      ),
+      ),*/
     );
   }
 

@@ -75,48 +75,33 @@ class _PlacePageState extends State<PlacePage> {
       backgroundColor: Colors.white,
       body: PdfDocumentLoader(
         assetName: 'assets/guide.pdf',
-        documentBuilder: (context, pdfDocument, pageCount)=> LayoutBuilder(
+        documentBuilder: (context, pdfDocument, pageCount) => LayoutBuilder(
           builder: (context, constraints) => PageView.builder(
-            onPageChanged: (index) {
-              pageChanged(index);
-            },
-            controller: _pageController,
-            scrollDirection: Axis.horizontal,
             itemCount: pageCount,
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) => Center(
-              child: Container(
-                //margin: EdgeInsets.all(8),
-                //padding: EdgeInsets.all(2),
-                  color: Colors.black12,
-                  child: PdfPageView(
-                    pageNumber: index + widget.page + 1,
-                    pageBuilder: (context, textureBuilder, pageSize) {
-                      return Stack(
-                        alignment: Alignment.bottomRight,
-                        children: <Widget>[
-                          Container(
-                            //margin: EdgeInsets.all(margin),
-                            //padding: EdgeInsets.all(padding),
-                              decoration: BoxDecoration(boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black12,
-                                    blurRadius: 4,
-                                    offset: Offset(2, 2))
-                              ]),
-                              child: textureBuilder()),
-                          //Text('${index + 1}', style: TextStyle(fontSize: 50))
-                          IconButton(
-                            icon: Icon(Icons.bookmark_border),
-                            onPressed: (){
-                              navigateToDetail(Mark('', '', '${index + widget.page}'), 'Добавить Закладку');
-                            },
-                          )
-                        ],
-                      );
-                    },
-                  )
-              ),
+            controller: _pageController,
+            itemBuilder: (context, index) => Container(
+                //margin: EdgeInsets.all(22),
+                //padding: EdgeInsets.all(22),
+                color: Colors.grey[100],
+                child: Stack(
+                  children: [
+                    Center(
+                      child: PdfPageView(
+                        pdfDocument: pdfDocument,
+                        pageNumber: index + 1 + widget.page,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: IconButton(
+                        icon: Icon(Icons.bookmark_border),
+                        onPressed: (){
+                          navigateToDetail(Mark('', '', '${index + widget.page}'), 'Добавить Закладку');
+                        },
+                      ),
+                    ),
+                  ],
+                )
             ),
           ),
         ),

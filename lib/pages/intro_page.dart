@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 
 /// An indicator showing the currently selected page of a PageController
@@ -100,6 +101,10 @@ class _IntroPageState extends State<IntroPage> {
     }
   }
 
+  backToHomePage() {
+    Navigator.pop(context);
+  }
+
   final List<Widget> _pages = <Widget>[
     /*new FlutterLogo(
     ),
@@ -109,32 +114,37 @@ class _IntroPageState extends State<IntroPage> {
     new FlutterLogo(
         style: FlutterLogoStyle.horizontal,
     ),*/
-    Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
-      color: Colors.cyan[200],
-      child: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-                'меню',
+    Container(
+      padding: const EdgeInsets.all(4.0),
+      color: HexColor('#52B6C0'),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment(0.0, -0.85),
+            child: Text(
+              'меню',
               style: TextStyle(
-                fontSize: 52,
-                fontWeight: FontWeight.bold,
-                color: Colors.white
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Aqum',
+                  color: Colors.white
               ),
             ),
-            SizedBox(
-              height: 40,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    child: Icon(Icons.play_arrow_rounded, color: Colors.white, size: 30,),
-                    decoration: BoxDecoration(
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Icon(Icons.play_arrow_rounded, color: Colors.white, size: 30,),
+                      decoration: BoxDecoration(
                         color: Colors.black12,
                         border: Border.all(
                             color: Colors.white,
@@ -142,119 +152,567 @@ class _IntroPageState extends State<IntroPage> {
                         borderRadius: BorderRadius.all(
                             Radius.circular(28)),
                         //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 10,),
-                  Text(
-                      'видеообращение',
-                    style: TextStyle(
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'видеообращение',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 26,
+                            fontFamily: 'Aqum',
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'посмортите видеообращение\nот автора путеводителя - льва лурье',
+                  style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold
-                    ),
+                      fontSize: 14,
+                      fontFamily: 'Aqum',
+                      fontWeight: FontWeight.w500
                   ),
-                ],
+                ),
               ),
-            ),
-            Text(
-                'посмортите видеообращение\nот автора путеводителя - льва лурье',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w500
-              ),
-            ),
-            SizedBox(height: 12,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Icon(Icons.book_outlined, color: Colors.white, size: 24,),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.black12,
-                      border: Border.all(
+              SizedBox(height: 12,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Icon(Icons.book_outlined, color: Colors.white, size: 24,),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        border: Border.all(
                           color: Colors.white,
                           width: 4,
+                        ),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(28)),
+                        //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
                       ),
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(28)),
-                      //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
                     ),
-                  ),
-                  SizedBox(width: 10,),
-                  Text(
-                    'путеводитель',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: Text(
-                'читайте о популярных\nи малоизвестных местах куртного района',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            SizedBox(height: 12,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Icon(Icons.map, color: Colors.white, size: 24,),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.black12,
-                      border: Border.all(
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'путеводитель',
+                        style: TextStyle(
                           color: Colors.white,
-                          width: 4),
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(28)),
-                      //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
+                          fontSize: 26,
+                          fontFamily: 'Aqum',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 10,),
-                  Text(
-                    'карта',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14.0),
-              child: Text(
-                'ищите достопримечательност\на карте и смотрите, как до них\nдобраться',
-                style: TextStyle(
-                  color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18
+                  ],
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  'читайте о популярных\nи малоизвестных местах куртного района',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontFamily: 'Aqum',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Icon(Icons.map, color: Colors.white, size: 24,),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        border: Border.all(
+                            color: Colors.white,
+                            width: 4),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(28)),
+                        //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'карта',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                          fontFamily: 'Aqum',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                child: Text(
+                  'ищите достопримечательност\на карте и смотрите, как до них\nдобраться',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      fontFamily: 'Aqum',
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+    //page2
+    Container(
+      padding: const EdgeInsets.all(4.0),
+      color: HexColor('#8E9C80'),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment(0.0, -0.85),
+            child: Text(
+              'карта',
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Aqum',
+                  color: Colors.white
+              ),
             ),
-          ],
-        ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Icon(Icons.article_outlined, color: Colors.white, size: 30,),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        border: Border.all(
+                            color: Colors.white,
+                            width: 4),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(28)),
+                        //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'фильтры',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 26,
+                            fontFamily: 'Aqum',
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'используйте фильры, чтобы\nнайти на карте нужные вам\n достопримечательности',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontFamily: 'Aqum',
+                      fontWeight: FontWeight.w500
+                  ),
+                ),
+              ),
+              SizedBox(height: 12,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Icon(Icons.navigation, color: Colors.white, size: 24,),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 4,
+                        ),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(28)),
+                        //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'как добраться',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                          fontFamily: 'Aqum',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  'выбрав нужную локацию,\nнажмите кнопку <<маршрут>>\nчтобы запустить навигацию',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontFamily: 'Aqum',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Icon(Icons.menu_book, color: Colors.white, size: 24,),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        border: Border.all(
+                            color: Colors.white,
+                            width: 4),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(28)),
+                        //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'путеводитель',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                          fontFamily: 'Aqum',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                child: Text(
+                  'выбрав нужный объект\nнажмите на кнопку, чтобы найти текст\nо нём в путеводителе',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    fontFamily: 'Aqum',
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Icon(Icons.local_taxi, color: Colors.white, size: 24,),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        border: Border.all(
+                            color: Colors.white,
+                            width: 4),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(28)),
+                        //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'такси',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                          fontFamily: 'Aqum',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                child: Text(
+                  'выберите нужную точку на карте\nа затем нажмите,] чтобы найти тексткнопку такси',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    fontFamily: 'Aqum',
+                  ),
+                ),
+              ),
+              /*Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Icon(Icons.favorite_border, color: Colors.white, size: 24,),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        border: Border.all(
+                            color: Colors.white,
+                            width: 4),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(28)),
+                        //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'метка партнеров',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                          fontFamily: 'Aqum',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                child: Text(
+                  'метки партнёров проекта.\nвыберите любую из них\nи нажмите на название для перехода на название для\n'
+                      'перехода на официальный сайт объекта',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    fontFamily: 'Aqum',
+                  ),
+                ),
+              ),*/
+            ],
+          ),
+        ],
+      ),
+    ),
+    //page3
+    Container(
+      padding: const EdgeInsets.all(4.0),
+      color: HexColor('#A23457'),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment(0.0, -0.85),
+            child: Text(
+              'путеводитель',
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Aqum',
+                  color: Colors.white
+              ),
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Icon(Icons.bookmark_border, color: Colors.white, size: 30,),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        border: Border.all(
+                            color: Colors.white,
+                            width: 4),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(28)),
+                        //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'закладки',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 26,
+                            fontFamily: 'Aqum',
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'добавляйте пнравившиеся\nстраницы в закладки и быстро\nвозвращайтесь к нужному \nфрагменту позжк',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontFamily: 'Aqum',
+                      fontWeight: FontWeight.w500
+                  ),
+                ),
+              ),
+              SizedBox(height: 12,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Icon(Icons.search, color: Colors.white, size: 24,),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 4,
+                        ),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(28)),
+                        //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'поиск страниц',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                          fontFamily: 'Aqum',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  'воспользуйтесь поиском,\nчтобы найти конкретную страницу',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontFamily: 'Aqum',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Icon(Icons.gesture, color: Colors.white, size: 24,),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        border: Border.all(
+                            color: Colors.white,
+                            width: 4),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(28)),
+                        //boxShadow: [BoxShadow(blurRadius: 32,color: Colors.grey,offset: Offset(1,3))]
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'навигация',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                          fontFamily: 'Aqum',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Text(
+                  'для просмотра, прокурчивайте\текст вправо/лево',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    fontFamily: 'Aqum',
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     ),
   ];
@@ -266,11 +724,6 @@ class _IntroPageState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text('Информация'),
-      ),
       body: new IconTheme(
         data: new IconThemeData(color: _kArrowColor),
         child: new Stack(
@@ -283,27 +736,38 @@ class _IntroPageState extends State<IntroPage> {
                 return _buildPageItem(context, index % _pages.length);
               },
             ),
-            new Positioned(
-              bottom: 0.0,
-              left: 0.0,
-              right: 0.0,
-              child: new Container(
-                color: Colors.grey[800].withOpacity(0.5),
-                padding: const EdgeInsets.all(24.0),
-                child: new Center(
-                  child: new DotsIndicator(
-                    controller: _controller,
-                    itemCount: _pages.length,
-                    onPageSelected: (int page) {
-                      _controller.animateToPage(
-                        page,
-                        duration: _kDuration,
-                        curve: _kCurve,
-                      );
-                    },
+            Stack(
+              children: [
+                Align(
+                  alignment: Alignment(0.95, -0.89),
+                  child: IconButton(
+                    icon: Icon(Icons.cancel_outlined, color: Colors.white, size: 34,),
+                    onPressed: ()=> Navigator.pop(context),
                   ),
                 ),
-              ),
+                new Positioned(
+                  bottom: 0.0,
+                  left: 0.0,
+                  right: 0.0,
+                  child: new Container(
+                    color: Colors.grey[800].withOpacity(0.5),
+                    padding: const EdgeInsets.all(24.0),
+                    child: new Center(
+                      child: new DotsIndicator(
+                        controller: _controller,
+                        itemCount: _pages.length,
+                        onPageSelected: (int page) {
+                          _controller.animateToPage(
+                            page,
+                            duration: _kDuration,
+                            curve: _kCurve,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -327,28 +791,23 @@ class Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Column(
-      mainAxisSize: MainAxisSize.min,
-      //mainAxisAlignment: MainAxisAlignment.center,
-      //crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        new Container(
-          height: MediaQuery.of(context).size.height/1.13,
-          width: MediaQuery.of(context).size.width,
-          child: new Container(
-            child: new Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                this.page,
-                new Material(
-                  type: MaterialType.transparency,
-                  child: new InkWell(onTap: this.onTap),
-                ),
-              ],
-            ),
+    return Center(
+      child: new Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: new Container(
+          child: new Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              this.page,
+              new Material(
+                type: MaterialType.transparency,
+                //child: new InkWell(onTap: this.onTap),
+              ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }

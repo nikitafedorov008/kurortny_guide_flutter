@@ -27,10 +27,10 @@ class _MapSheetState extends State<MapSheet> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: Text(
               widget.name,
-              overflow: TextOverflow.ellipsis,
+              overflow: TextOverflow.visible,
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w800,
