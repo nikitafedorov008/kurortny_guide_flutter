@@ -5,7 +5,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:kurortny_guide_flutter/model/map_list.dart';
 import 'package:kurortny_guide_flutter/model/map_marker.dart';
+import 'package:kurortny_guide_flutter/pages/search_page.dart';
 import 'package:kurortny_guide_flutter/widgets/map_sheet.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 class MapPage extends StatefulWidget {
   @override
@@ -16,6 +18,7 @@ class _MapPageState extends State<MapPage> {
   GoogleMapController mapController;
   Set<MapMarker> markersList = new Set();
   List<bool> _isSwitched = [true, true, true, true, true, true, true,];
+  FloatingSearchBarController controller;
   
   BitmapDescriptor markerIcon(String type) {
     if (type == 'природный объект') {
@@ -187,6 +190,15 @@ class _MapPageState extends State<MapPage> {
         elevation: 0,
         title: Text('Карта'),
         actions: [
+          IconButton(
+            icon: Icon(Icons.search, color: HexColor('#8E9C80'),),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: DataSearch(),
+              );
+            },
+          ),
           PopupMenuButton(
             icon: Icon(Icons.settings, color: HexColor('#8E9C80'),),
             itemBuilder: (BuildContext buildContext) => [
@@ -441,16 +453,16 @@ class _MapPageState extends State<MapPage> {
         ],
       ),
       body: GoogleMap(
-          initialCameraPosition: CameraPosition(target: LatLng(60.0702,30.1120), zoom: 9),
-          onMapCreated: _onMapCreated,
-          myLocationEnabled: true,
-          compassEnabled: false,
-          myLocationButtonEnabled: true,
-          zoomControlsEnabled: true,
-          mapType: mapType,
-          mapToolbarEnabled: true,
-          indoorViewEnabled: true,
-          markers: markersList.toSet(),
+        initialCameraPosition: CameraPosition(target: LatLng(60.0702,30.1120), zoom: 9),
+        onMapCreated: _onMapCreated,
+        myLocationEnabled: true,
+        compassEnabled: false,
+        myLocationButtonEnabled: true,
+        zoomControlsEnabled: true,
+        mapType: mapType,
+        mapToolbarEnabled: true,
+        indoorViewEnabled: true,
+        markers: markersList.toSet(),
       ),
     );
   }

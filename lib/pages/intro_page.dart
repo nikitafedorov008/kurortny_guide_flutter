@@ -77,7 +77,7 @@ class IntroPage extends StatefulWidget {
 
 class _IntroPageState extends State<IntroPage> {
 
-  final _controller = new PageController(viewportFraction: 1.4);
+  final _controller = new PageController(viewportFraction: 1.0);
 
   static const _kDuration = const Duration(milliseconds: 300);
 
