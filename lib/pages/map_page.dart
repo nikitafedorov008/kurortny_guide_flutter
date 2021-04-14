@@ -14,8 +14,9 @@ class MapPage extends StatefulWidget {
   _MapPageState createState() => _MapPageState();
 }
 
+GoogleMapController mapController;
+
 class _MapPageState extends State<MapPage> {
-  GoogleMapController mapController;
   Set<MapMarker> markersList = new Set();
   List<bool> _isSwitched = [true, true, true, true, true, true, true,];
   FloatingSearchBarController controller;

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:kurortny_guide_flutter/model/map_list.dart';
+import 'package:kurortny_guide_flutter/pages/map_page.dart';
 import 'package:kurortny_guide_flutter/pages/place_page.dart';
 
 class DataSearch extends SearchDelegate<String> {
+
+  String get searchFieldLabel => "Поиск по карте";
 
   List<Map<String, dynamic>> architecture_locations = [
     {
@@ -134,7 +138,17 @@ class DataSearch extends SearchDelegate<String> {
           leading: titleIcon(index),
           title: Text(searchList[index]['Location_Name']),
           subtitle: Text(searchList[index]['Location_Type']),
-          onTap:()=> print('${searchList[index]['Location_Type']}' + ' tapped'),
+          onTap:() {
+            mapController.animateCamera(
+                CameraUpdate.newCameraPosition(
+                    CameraPosition(
+                        target: LatLng(searchList[index]['coordinates'][1], searchList[index]['coordinates'][0]),
+                        zoom: 20,
+                    )
+                )
+            );
+            Navigator.pop(context);
+          },
         ),
       itemCount: searchList.length,
     );
@@ -156,6 +170,8 @@ List<Map<String, dynamic>> search_locations = [];
 
 
 class DataSearchGuide extends SearchDelegate<String> {
+
+  String get searchFieldLabel => "Поиск по путеводителю";
 
   @override
   List<Widget> buildActions(BuildContext context) {
