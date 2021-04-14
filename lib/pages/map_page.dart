@@ -265,7 +265,7 @@ class _MapPageState extends State<MapPage> {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(Icons.add),
+                        Icon(Icons.account_balance),
                         Text('Религия'),
                         Switch(
                           activeColor: Colors.deepPurple,
@@ -456,7 +456,7 @@ class _MapPageState extends State<MapPage> {
         initialCameraPosition: CameraPosition(target: LatLng(60.0702,30.1120), zoom: 9),
         onMapCreated: _onMapCreated,
         myLocationEnabled: true,
-        compassEnabled: false,
+        compassEnabled: true,
         myLocationButtonEnabled: true,
         zoomControlsEnabled: true,
         mapType: mapType,

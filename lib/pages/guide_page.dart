@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:kurortny_guide_flutter/model/mark.dart';
 import 'package:kurortny_guide_flutter/pages/mark_list_page.dart';
+import 'package:kurortny_guide_flutter/pages/search_page.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:pdf_render/pdf_render_widgets2.dart';
 
@@ -101,7 +102,16 @@ class _GuidePageState extends State<GuidePage> {
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.bookmarks_outlined),
+            icon: Icon(Icons.search, color: HexColor('#A23457'),),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: DataSearchGuide(),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.bookmarks_outlined, color: HexColor('#A23457'),),
             onPressed: ()=> Navigator.push(context,
               MaterialPageRoute(
                 builder: (_) => MarkListPage(),
